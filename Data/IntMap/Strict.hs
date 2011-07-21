@@ -171,7 +171,7 @@ module Data.IntMap.Strict  (
 
 import Prelude hiding (lookup,map,filter,foldr,foldl,null)
 import Data.Bits 
-import qualified Data.IntSet.Strict as IntSet
+import qualified Data.IntSet as IntSet
 import Data.Monoid (Monoid(..))
 import Data.Maybe (fromMaybe)
 import Data.Typeable
