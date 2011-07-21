@@ -37,7 +37,7 @@
 -- (32 or 64).
 -----------------------------------------------------------------------------
 
-module Data.IntSet  ( 
+module Data.IntSet.Strict  (
             -- * Set type
               IntSet          -- instance Eq,Show
 

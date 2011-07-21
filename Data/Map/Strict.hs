@@ -38,7 +38,7 @@
 -- the Big-O notation <http://en.wikipedia.org/wiki/Big_O_notation>.
 -----------------------------------------------------------------------------
 
-module Data.Map  ( 
+module Data.Map.Strict  (
             -- * Map type
 #if !defined(TESTING)
               Map              -- instance Eq,Show,Read
@@ -193,7 +193,7 @@ module Data.Map  (
             ) where
 
 import Prelude hiding (lookup,map,filter,null)
-import qualified Data.Set as Set
+import qualified Data.Set.Strict as Set
 import qualified Data.List as List
 import Data.Monoid (Monoid(..))
 import Control.Applicative (Applicative(..), (<$>))

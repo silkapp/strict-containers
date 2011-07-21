@@ -42,7 +42,7 @@
 -- (32 or 64).
 -----------------------------------------------------------------------------
 
-module Data.IntMap  ( 
+module Data.IntMap.Strict  (
             -- * Map type
 #if !defined(TESTING)
               IntMap, Key          -- instance Eq,Show
@@ -171,7 +171,7 @@ module Data.IntMap  (
 
 import Prelude hiding (lookup,map,filter,foldr,foldl,null)
 import Data.Bits 
-import qualified Data.IntSet as IntSet
+import qualified Data.IntSet.Strict as IntSet
 import Data.Monoid (Monoid(..))
 import Data.Maybe (fromMaybe)
 import Data.Typeable

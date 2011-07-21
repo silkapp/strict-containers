@@ -15,7 +15,7 @@
 --
 -----------------------------------------------------------------------------
 
-module Data.Graph(
+module Data.Graph.Strict(
 
 	-- * External interface
 
@@ -46,7 +46,7 @@ module Data.Graph(
 	-- tree, back, cross, forward,
 	reachable, path,
 
-	module Data.Tree
+	module Data.Tree.Strict
 
     ) where
 
@@ -59,10 +59,10 @@ module Data.Graph(
 import Control.Monad.ST
 import Data.Array.ST (STArray, newArray, readArray, writeArray)
 #else
-import Data.IntSet (IntSet)
-import qualified Data.IntSet as Set
+import Data.IntSet.Strict (IntSet)
+import qualified Data.IntSet.Strict as Set
 #endif
-import Data.Tree (Tree(Node), Forest)
+import Data.Tree.Strict (Tree(Node), Forest)
 
 -- std interfaces
 import Data.Maybe

@@ -33,7 +33,7 @@
 --
 -----------------------------------------------------------------------------
 
-module Data.Sequence (
+module Data.Sequence.Strict (
 	Seq,
 	-- * Construction
 	empty,		-- :: Seq a

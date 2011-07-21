@@ -34,7 +34,7 @@
 -- equality.
 -----------------------------------------------------------------------------
 
-module Data.Set  ( 
+module Data.Set.Strict  (
             -- * Set type
               Set          -- instance Eq,Ord,Show,Read,Data,Typeable
 
