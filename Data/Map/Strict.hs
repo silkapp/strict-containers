@@ -233,7 +233,7 @@ m1 \\ m2 = difference m1 m2
 --------------------------------------------------------------------}
 -- | A Map from keys @k@ to values @a@. 
 data Map k a  = Tip 
-              | Bin {-# UNPACK #-} !Size !k a !(Map k a) !(Map k a) 
+              | Bin {-# UNPACK #-} !Size !k !a !(Map k a) !(Map k a)
 
 type Size     = Int
 

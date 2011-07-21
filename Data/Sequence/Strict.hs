@@ -264,8 +264,8 @@ seqDataType = mkDataType "Data.Sequence.Seq" [emptyConstr, consConstr]
 
 data FingerTree a
 	= Empty
-	| Single a
-	| Deep {-# UNPACK #-} !Int !(Digit a) (FingerTree (Node a)) !(Digit a)
+	| Single !a
+	| Deep {-# UNPACK #-} !Int !(Digit a) !(FingerTree (Node a)) !(Digit a)
 #if TESTING
 	deriving Show
 #endif
@@ -344,10 +344,10 @@ deepR pr m (Just sf)	= deep pr m sf
 -- Digits
 
 data Digit a
-	= One a
-	| Two a a
-	| Three a a a
-	| Four a a a a
+	= One !a
+	| Two !a !a
+	| Three !a !a !a
+	| Four !a !a !a !a
 #if TESTING
 	deriving Show
 #endif
@@ -406,8 +406,8 @@ digitToTree' n (One a) = n `seq` Single a
 -- Nodes
 
 data Node a
-	= Node2 {-# UNPACK #-} !Int a a
-	| Node3 {-# UNPACK #-} !Int a a a
+	= Node2 {-# UNPACK #-} !Int !a !a
+	| Node3 {-# UNPACK #-} !Int !a !a !a
 #if TESTING
 	deriving Show
 #endif
