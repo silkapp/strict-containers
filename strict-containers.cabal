@@ -1,5 +1,5 @@
 name:       strict-containers
-version:    0.4.0.0
+version:    0.4.2.0
 license:    BSD3
 license-file:    LICENSE
 maintainer:    code@silkapp.com
@@ -21,13 +21,14 @@ source-repository head
     location: http://darcs.haskell.org/packages/containers/
 
 Library {
-    build-depends: base >= 4.2 && < 6, array, containers == 0.4.*
+    build-depends: base >= 4.2 && < 6, array, deepseq >= 1.1 && < 1.3
     ghc-options: -O2
     if impl(ghc>6.10)
         Ghc-Options: -fregs-graph
     exposed-modules:
         Data.IntMap.Strict
         Data.Map.Strict
+        Data.IntSet.Strict
         Data.Set.Strict
     include-dirs: include
     extensions: CPP
