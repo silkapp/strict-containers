@@ -118,6 +118,8 @@ module Data.Map.Strict (
             -- ** Map
             , map
             , mapWithKey
+            , mapMaybeRange
+            , mapMaybeRangeWithKey
             , mapAccum
             , mapAccumWithKey
             , mapAccumRWithKey
@@ -1535,6 +1537,37 @@ mapWithKey _ Tip = Tip
 mapWithKey f (Bin sx kx x l r) = Bin sx kx (f kx x) (mapWithKey f l) (mapWithKey f r)
 #if __GLASGOW_HASKELL__ >= 700
 {-# INLINABLE mapWithKey #-}
+#endif
+
+-- | /O(n)/. Map a function over a range of values in the map.
+--
+-- > mapMaybeRange (++ "x") (fromList [(5,"a"), (3,"b")]) == fromList [(3, "bx"), (5, "ax")]
+
+mapMaybeRange :: Ord k => (a -> Maybe a) -> (Maybe k, Maybe k) -> Map k a -> Map k a
+mapMaybeRange f rng = mapMaybeRangeWithKey (\_ x -> f x) rng
+#if __GLASGOW_HASKELL__ >= 700
+{-# INLINABLE mapMaybeRange #-}
+#endif
+
+-- | /O(n)/. Map a function over a range of values in the map.
+--
+-- > let f key x = (show key) ++ ":" ++ x
+-- > mapMaybeRangeWithKey f (fromList [(5,"a"), (3,"b")]) == fromList [(3, "3:b"), (5, "5:a")]
+
+mapMaybeRangeWithKey :: Ord k => (k -> a -> Maybe a) -> (Maybe k, Maybe k) -> Map k a -> Map k a
+mapMaybeRangeWithKey _ _ Tip = Tip
+mapMaybeRangeWithKey f rng@(from, to) (Bin sx kx x l r) =
+  let cf    = maybe True (kx >=) from
+      ct    = maybe True (kx <=) to
+      left  = if cf then mapMaybeRangeWithKey f rng l else l
+      right = if ct then mapMaybeRangeWithKey f rng r else r
+      newx  = if cf && ct then f kx x else Just x
+  in case newx of
+    Just y  -> join kx y left right
+    Nothing -> merge left right
+
+#if __GLASGOW_HASKELL__ >= 700
+{-# INLINABLE mapMaybeRangeWithKey #-}
 #endif
 
 -- | /O(n)/. The function 'mapAccum' threads an accumulating
