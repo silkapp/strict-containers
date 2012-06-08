@@ -1,6 +1,5 @@
 {-# LANGUAGE NoBangPatterns #-}
 #if !defined(TESTING) && __GLASGOW_HASKELL__ >= 703
-{-# LANGUAGE Safe #-}
 #endif
 -----------------------------------------------------------------------------
 -- |

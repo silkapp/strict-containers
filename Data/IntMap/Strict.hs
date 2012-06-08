@@ -1,6 +1,5 @@
 {-# LANGUAGE NoBangPatterns, ScopedTypeVariables #-}
 #if !defined(TESTING) && __GLASGOW_HASKELL__ >= 703
-{-# LANGUAGE Trustworthy #-}
 #endif
 -----------------------------------------------------------------------------
 -- |
