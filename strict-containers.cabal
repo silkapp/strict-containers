@@ -1,5 +1,5 @@
 name:       strict-containers
-version:    0.4.3
+version:    0.4.3.1
 license:    BSD3
 license-file:    LICENSE
 maintainer:    code@silkapp.com
@@ -16,6 +16,10 @@ build-type: Simple
 cabal-version:  >=1.6
 extra-source-files: include/Typeable.h
 
+Flag StrictContainers
+  Description: Does containers contain strict maps?
+  Default: True
+
 source-repository head
     type:     darcs
     location: http://darcs.haskell.org/packages/containers/
@@ -26,8 +30,6 @@ Library {
     if impl(ghc>6.10)
         Ghc-Options: -fregs-graph
     exposed-modules:
-        Data.IntMap.Strict
-        Data.Map.Strict
         Data.IntSet.Strict
         Data.Set.Strict
     include-dirs: include
@@ -39,5 +41,11 @@ Library {
     if impl(ghc) {
         extensions: DeriveDataTypeable, MagicHash, Rank2Types
     }
+    if flag(StrictContainers)
+      Build-Depends: containers >= 0.5 && < 0.6
+    else
+      exposed-modules:
+        Data.IntMap.Strict
+        Data.Map.Strict
 }
 
