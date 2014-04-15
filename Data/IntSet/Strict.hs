@@ -41,7 +41,7 @@
 -- etc are inlined. If they do not, the memory allocation skyrockets. The GHC
 -- usually gets it right, but it is disastrous if it does not. Therefore we
 -- explicitly mark these functions INLINE.
-
+{-# LANGUAGE CPP, DeriveDataTypeable, StandaloneDeriving #-}
 module Data.IntSet.Strict (
             -- * Set type
 #if !defined(TESTING)
@@ -886,8 +886,12 @@ instance Read IntSet where
   Typeable
 --------------------------------------------------------------------}
 
+#if MIN_VERSION_base(4,7,0)
+deriving instance Typeable IntSet
+#else
 #include "Typeable.h"
 INSTANCE_TYPEABLE0(IntSet,intSetTc,"IntSet")
+#endif
 
 {--------------------------------------------------------------------
   NFData

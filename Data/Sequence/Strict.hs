@@ -32,7 +32,7 @@
 -- using either qualification or the @hiding@ clause.
 --
 -----------------------------------------------------------------------------
-
+{-# LANGUAGE CPP, DeriveDataTypeable, StandaloneDeriving #-}
 module Data.Sequence.Strict (
     Seq,
     -- * Construction
@@ -225,8 +225,12 @@ instance Monoid (Seq a) where
     mempty = empty
     mappend = (><)
 
+#if MIN_VERSION_base(4,7,0)
+deriving instance Typeable Seq
+#else
 #include "Typeable.h"
 INSTANCE_TYPEABLE1(Seq,seqTc,"Seq")
+#endif
 
 #if __GLASGOW_HASKELL__
 instance Data a => Data (Seq a) where
@@ -903,7 +907,11 @@ data ViewL a
     deriving (Eq, Ord, Show, Read)
 #endif
 
+#if MIN_VERSION_base(4,7,0)
+deriving instance Typeable ViewL
+#else
 INSTANCE_TYPEABLE1(ViewL,viewLTc,"ViewL")
+#endif
 
 instance Functor ViewL where
     {-# INLINE fmap #-}
@@ -954,7 +962,11 @@ data ViewR a
     deriving (Eq, Ord, Show, Read)
 #endif
 
+#if MIN_VERSION_base(4,7,0)
+deriving instance Typeable ViewR
+#else
 INSTANCE_TYPEABLE1(ViewR,viewRTc,"ViewR")
+#endif
 
 instance Functor ViewR where
     {-# INLINE fmap #-}

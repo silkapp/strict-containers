@@ -49,7 +49,7 @@
 --
 -- All methods that can be INLINE are not recursive -- a 'go' function doing
 -- the real work is provided.
-
+{-# LANGUAGE CPP, DeriveDataTypeable, StandaloneDeriving #-}
 module Data.Set.Strict (
             -- * Set type
 #if !defined(TESTING)
@@ -743,8 +743,12 @@ instance (Read a, Ord a) => Read (Set a) where
   Typeable/Data
 --------------------------------------------------------------------}
 
+#if MIN_VERSION_base(4,7,0)
+deriving instance Typeable Set
+#else
 #include "Typeable.h"
 INSTANCE_TYPEABLE1(Set,setTc,"Set")
+#endif
 
 {--------------------------------------------------------------------
   NFData
