@@ -1,5 +1,5 @@
 name:       strict-containers
-version:    0.4.3.2
+version:    0.4.3.3
 license:    BSD3
 license-file:    LICENSE
 maintainer:    code@silk.co
@@ -14,7 +14,6 @@ description:
         This fork makes sure all containers are value-strict.
 build-type: Simple
 cabal-version:  >=1.6
-extra-source-files: include/Typeable.h
 
 source-repository head
     type:     darcs
