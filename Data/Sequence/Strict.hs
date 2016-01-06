@@ -151,16 +151,18 @@ import Prelude hiding (
     scanl, scanl1, scanr, scanr1, replicate, zip, zipWith, zip3, zipWith3,
     takeWhile, dropWhile, iterate, reverse, filter, mapM, sum, all)
 import qualified Data.List
-import Control.Applicative (Applicative(..), (<$>), Alternative,
-                            WrappedMonad(..), liftA, liftA2, liftA3)
-import qualified Control.Applicative as Applicative (Alternative(..))
+import qualified Control.Applicative as A (Alternative (..))
+import Control.Applicative (Alternative, WrappedMonad(..), liftA, liftA2, liftA3)
 import Control.DeepSeq (NFData(rnf))
 import Control.Monad (MonadPlus(..), ap)
-import Data.Monoid (Monoid(..))
 import Data.Functor (Functor(..))
-import Data.Foldable (Foldable(foldl, foldl1, foldr, foldr1, foldMap), foldl', toList)
+import Data.Foldable (Foldable(foldl, foldl1, foldr, foldr1), foldl', toList)
 #if MIN_VERSION_base(4,8,0)
 import Data.Foldable (foldr')
+#else
+import Data.Monoid (Monoid(..))
+import Data.Foldable (foldMap)
+import Control.Applicative (Applicative  ((<*>), pure), Alternative ((<|>)), (<$>), (*>))
 #endif
 import Data.Traversable
 import Data.Typeable
